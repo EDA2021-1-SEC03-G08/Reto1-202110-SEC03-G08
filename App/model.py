@@ -63,7 +63,7 @@ def newCatalog():
     catalog['channels_titles'] = lt.newList('ARRAY_LIST',
                                  cmpfunction=comparechannels)
     catalog['country'] = lt.newList('ARRAY_LIST',
-                                 cmpfunction=compare)country                           
+                                 cmpfunction=comparecountry)                           
     catalog['categories'] = lt.newList('ARRAY_LIST')
     return catalog
 # Funciones para agregar informacion al catalogo
@@ -81,12 +81,12 @@ def addChannelTitle(catalog, channel, title):
     """
     channels_title = catalog['channels_title']
     poschannel = lt.isPresent(channels_title, channel)
-    if posauthor > 0:
-        author = lt.getElement(authors, posauthor)
+    if poschannel > 0:
+        title = lt.getElement(channels_title , poschannel)
     else:
-        author = newAuthor(authorname)
-        lt.addLast(authors, author)
-    lt.addLast(author['books'], book)
+        title = newTitle(channel)
+        lt.addLast(channels, title)
+    lt.addLast(title['titles'], title)
 
 # Funciones para creacion de datos
 
@@ -94,15 +94,15 @@ def addChannelTitle(catalog, channel, title):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 def comparetitles(title1, title):
-    if (title1.lower() in title['name'].lower()):
+    if (title1.lower() in title['title'].lower()):
         return 0
     return -1
 
 
-def compareratings(book1, book2):
-    return (float(book1['average_rating']) > float(book2['average_rating']))
+def comparechannels(title1, title2):
+    return (float(title1['average_rating']) > float(book2['average_rating']))
 
 
-def comparetagnames(name, tag):
-    return (name == tag['name'])
+def comparetagnames(title, categories):
+    return (title == categories['title'])
 # Funciones de ordenamiento
