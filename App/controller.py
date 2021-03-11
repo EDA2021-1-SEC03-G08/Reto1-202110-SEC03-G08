@@ -70,4 +70,31 @@ def loadCategories(catalog):
 
 # Funciones de ordenamiento
 
+def sortBooks(catalog, size):
+    """
+    Ordena los libros por average_rating
+    """
+    return model.sortTitles(catalog, size)
 # Funciones de consulta sobre el catálogo
+
+def getTitlesByCountry(catalog, country):
+    """
+    Retrona los libros de un autor
+    """
+    country = model.getTitlesByCountry(catalog, country)
+    return country
+
+
+def getTopchannels(catalog, number):
+    """
+    Retorna los mejores libros
+    """
+    bestchannel = model.TopChannel(catalog, number)
+    return bestchannel
+
+
+def countLikes(catalog, category):
+    """
+    Retorna los libros que fueron etiquetados con el tag
+    """
+    return model.countTitles(catalog, category)
