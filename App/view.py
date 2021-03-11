@@ -22,7 +22,7 @@
 
 import config as cf
 import sys
-import controller
+from App import controller
 from DISClib.ADT import list as lt
 assert cf
 
@@ -33,11 +33,23 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+def initCatalog():
+    """
+    Inicializa el catalogo de libros
+    """
+    return controller.initCatalog()
+
+
+def loadData(catalog):
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadData(catalog)
 
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("2- Buscar top videos ")
 
 catalog = None
 
@@ -49,9 +61,15 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
         print("Cargando información de los archivos ....")
+        catalog = controller.initCatalog
+        controller.loadData(catalog)
+
 
     elif int(inputs[0]) == 2:
-        pass
+        tam=input("Tamaño del ranking: ")
+        pai=input("Pais de origen: ")
+        catego=input("categoria del video")
+
 
     else:
         sys.exit(0)
