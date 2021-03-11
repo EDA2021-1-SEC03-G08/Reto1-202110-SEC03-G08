@@ -35,14 +35,74 @@ Se define la estructura de un catálogo de videos. El catálogo tendrá dos list
 los mismos.
 """
 
-# Construccion de modelos
 
+
+
+# Construccion de modelos
+def newCatalog():
+    """
+    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    todos los libros, adicionalmente, crea una lista vacia para los autores,
+    una lista vacia para los generos y una lista vacia para la asociación
+    generos y libros. Retorna el catalogo inicializado.
+    """
+    catalog = {'video_ids': None,
+               'titles': None,
+               'channels_title': None,
+               'trending_date': None,
+               'country': None,
+               'views': None,
+               'likes': None,
+               'dislikes': None,
+               'categories': None
+               }
+
+    catalog['video_ids'] = lt.newList()
+    catalog['titles'] = lt.newList('ARRAY_LIST',
+                                    cmpfunction=comparetitles)
+    catalog['channels_titles'] = lt.newList('ARRAY_LIST',
+                                 cmpfunction=comparechannels)
+    catalog['country'] = lt.newList('ARRAY_LIST',
+                                 cmpfunction=compare)country                           
+    catalog['categories'] = lt.newList('ARRAY_LIST')
+    return catalog
 # Funciones para agregar informacion al catalogo
+
+def addTitle(catalog, title):
+    lt.addLast(catalog['titles'], title)
+    authors = title['channels_title'].split(",")
+    for channel in channels_title:
+        addChannelTitle(catalog, chennel.strip(), title)
+
+def addChannelTitle(catalog, channel, title):
+    """
+    Adiciona un autor a lista de autores, la cual guarda referencias
+    a los libros de dicho autor
+    """
+    channels_title = catalog['channels_title']
+    poschannel = lt.isPresent(channels_title, channel)
+    if posauthor > 0:
+        author = lt.getElement(authors, posauthor)
+    else:
+        author = newAuthor(authorname)
+        lt.addLast(authors, author)
+    lt.addLast(author['books'], book)
 
 # Funciones para creacion de datos
 
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+def comparetitles(title1, title):
+    if (title1.lower() in title['name'].lower()):
+        return 0
+    return -1
 
+
+def compareratings(book1, book2):
+    return (float(book1['average_rating']) > float(book2['average_rating']))
+
+
+def comparetagnames(name, tag):
+    return (name == tag['name'])
 # Funciones de ordenamiento
